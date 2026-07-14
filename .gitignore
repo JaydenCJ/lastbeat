@@ -1,0 +1,18 @@
+# build artifacts
+/lastbeat
+/dist/
+
+# runtime state from local experiments
+lastbeat.state.json
+*.state.json
+
+# test and coverage output
+*.test
+*.out
+coverage.*
+
+# editor noise
+.idea/
+.vscode/
+*.swp
+.DS_Store

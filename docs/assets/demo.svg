@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400" font-family="Menlo, Consolas, monospace" font-size="14">
+  <rect width="720" height="400" rx="10" fill="#101418"/>
+  <circle cx="24" cy="22" r="6" fill="#ff5f56"/>
+  <circle cx="44" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="64" cy="22" r="6" fill="#27c93f"/>
+  <text x="360" y="27" fill="#8b949e" text-anchor="middle" font-size="12">lastbeat — your cron jobs ping, you hear about the silence</text>
+  <g fill="#c9d1d9">
+    <text x="24" y="62"><tspan fill="#7ee787">$</tspan> lastbeat sweep</text>
+    <text x="24" y="88">sweep: <tspan fill="#f85149">tmp-cleaner is down</tspan> (up -&gt; down, overdue by 2h59m59s)</text>
+    <text x="24" y="122"><tspan fill="#7ee787">$</tspan> lastbeat status</text>
+    <text x="24" y="148"><tspan fill="#79c0ff">lastbeat status</tspan> — 3 checks @ 2026-07-13T06:00:00Z</text>
+    <text x="24" y="182" fill="#d2a8ff">  CHECK           STATUS    LAST PING             DUE</text>
+    <text x="24" y="206">  nightly-backup  <tspan fill="#7ee787">up</tspan>        2026-07-13T02:00:01Z  in 20h0m1s</text>
+    <text x="24" y="228">  tmp-cleaner     <tspan fill="#f85149">down</tspan>      2026-07-13T02:00:01Z  overdue by 2h59m59s</text>
+    <text x="24" y="250">  certs-renew     <tspan fill="#8b949e">waiting</tspan>   never                 —</text>
+    <text x="24" y="280" fill="#f85149">1 check down</text>
+    <text x="24" y="314"><tspan fill="#7ee787">$</tspan> cat alerts.log</text>
+    <text x="24" y="340" font-size="12">{"tool":"lastbeat","schema_version":1,<tspan fill="#f778ba">"event":"down"</tspan>,<tspan fill="#79c0ff">"check":"tmp-cleaner"</tspan>,</text>
+    <text x="24" y="360" font-size="12"> "prev_status":"up","at":"2026-07-13T06:00:00Z",<tspan fill="#ffa657">"overdue_seconds":10799</tspan>,…}</text>
+  </g>
+</svg>

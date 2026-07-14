@@ -1,0 +1,23 @@
+# crontab.example — wiring cron jobs to lastbeat.
+# Checks referenced here must exist in lastbeat.toml first.
+
+# --- Style A: serve mode ---------------------------------------------
+# `lastbeat serve` runs somewhere (systemd, tmux, a container) and jobs
+# report over loopback HTTP. `curl` after `&&` means only a successful
+# run pings; a crashed job stays silent and lastbeat notices.
+
+15 2 * * *  /usr/local/bin/backup.sh && curl -fsS http://127.0.0.1:8377/ping/nightly-backup
+0  *  * * *  /usr/local/bin/clean-tmp.sh && curl -fsS http://127.0.0.1:8377/ping/tmp-cleaner
+
+# Report explicit failures too (exit code becomes the note):
+30 4 * * 0  /usr/local/bin/renew-certs.sh \
+  && curl -fsS http://127.0.0.1:8377/ping/certs-renew \
+  || curl -fsS --data "exit $?" http://127.0.0.1:8377/ping/certs-renew/fail
+
+# --- Style B: daemonless ---------------------------------------------
+# No long-lived process: jobs write the state file directly, and one
+# extra cron line evaluates silence and fires alerts. Everything lives
+# in the config's directory.
+
+15 2 * * *  /usr/local/bin/backup.sh && lastbeat -c /etc/lastbeat/lastbeat.toml ping nightly-backup
+*/5 * * * *  lastbeat -c /etc/lastbeat/lastbeat.toml sweep --json >> /var/log/lastbeat-sweep.log
